@@ -58,15 +58,17 @@ class Monty_Hall:
 
     def Result(self,door):
         if self.doors[door] == 'car':
-            print("You Win!!")
+            #print("You Win!!")
             return True
         else:
-            print("You lose...")
+            #print("You lose...")
             return False
 
     def Play(self):
         if self.autoplay:
             for i in range(self.num_runs):
+                if not i % 1000:
+                    print("Run: ",i)
                 self.Shuffler()
                 door = self.Auto_Pick_Door()
                 doors_to_switch = self.Reveal(door)
@@ -79,8 +81,8 @@ class Monty_Hall:
                     self.wins += 1
                 else:
                     self.count += 1
-            print("Win percentage: ",self.wins/self.count)
-            return self.wins/self.count
+            print("Win percentage: ",float(self.wins)/self.count)
+            return float(self.wins)/self.count
         else:
             playing = True
             while playing:

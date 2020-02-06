@@ -21,6 +21,13 @@ class Monty_Hall:
         self.doors = self.Initialize_Doors(num_doors,num_cars)
 
     def Initialize_Doors(self,num_doors,num_cars):
+        """
+        Initialize 'doors' list; with 'num_cars' cars and 'num_doors'-'num_cars' goats
+        i.e. if num_cars=3 & num_doors = 6, 'doors' will be ['car','car','car','goat','goat','goat']
+        :param num_doors: total number of doors in Monty Hall Problem
+        :param num_cars: number of cars (must be less than num_doors; should be less than or equal to num_doors - 2)
+        :return doors: a list of what's behind each door, car or goat
+        """
         doors = []
         for j in range(num_cars):
             doors.append('car')
@@ -29,12 +36,23 @@ class Monty_Hall:
         return doors
 
     def Shuffler(self):
+        """
+        Randomly shuffles the 'doors' list; because the 'doors' list is just in order, we need to make the door setup random
+        """
         random.shuffle(self.doors)
 
     def Auto_Pick_Door(self):
+        """
+        When play is auto, we will randomly select one of the doors
+        :return index of 'doors' list
+        """
         return random.randint(0,self.num_doors - 1)
 
     def Get_Cars_Goats(self):
+        """
+        After shuffling, get indices where 'doors' is "car" or "goat"
+        :return indices where 'doors' is "car", indices where 'doors' is "goat:
+        """
         car_inds = []
         goat_inds = []
         for i in range(self.num_doors):
@@ -45,6 +63,11 @@ class Monty_Hall:
         return car_inds,goat_inds
 
     def Reveal(self,door):
+        """
+        When Monty reveals a random door with a goat, return the list of possible doors
+        to switch to.
+        :return list of possible doors to switch  
+        """
         # Note; calls to index below are linear, for large lists may need to switch
         cars,goats = self.Get_Cars_Goats()
         if door in cars:
